@@ -1,0 +1,73 @@
+﻿@page "/minusculas"
+
+<h3>Minusculas</h3>
+
+<div class="row">
+    <div class="input-group m-1 my-4" style="max-width: 300px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Letra/Palabra</span>
+        </div>
+        <input type="text" @bind-value="@letra" class="form-control" placeholder="A">
+        <div class="input-group-append">
+            <button @onclick="calcular" class="btn btn-outline-secondary">Calcular</button>
+        </div>
+    </div>
+</div>
+
+@if (letra != null)
+{
+    <div class="row text-center m-2 my-4">
+        La letra/palabra @letra en minusculas es @minus.
+    </div>
+}
+
+<div class="row">
+    <div class="input-group m-1 my-4" style="max-width: 300px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Todas las letras</span>
+        </div>
+        <div class="input-group-append">
+            <button @onclick="TodasLasLetras" class="btn btn-outline-secondary">Calcular</button>
+        </div>
+    </div>
+</div>
+
+@if (Visible == true)
+{
+    <div class="row text-center m-2 my-4" style="max-width: 300px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Mayusculas</th>
+                    <th scope="col">Minusculas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (i = 0; i <= 25; i++)
+                {
+                    <tr>
+                        <td>@Letras[i]</td>
+                        <td>@Letras[i].ToLower()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code {
+    public String letra { get; set; }
+    public String minus { get; set; }
+    public bool? Visible { get; set; }
+    String[] Letras = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
+    public int i;
+
+    void calcular()
+    {
+        minus = letra.ToLower();
+    }
+    void TodasLasLetras()
+    {
+        Visible = true;
+    }
+}

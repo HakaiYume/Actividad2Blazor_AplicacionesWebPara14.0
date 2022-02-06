@@ -1,0 +1,50 @@
+﻿@page "/EstadoDelAgua"
+
+<h3>Estado Del Agua</h3>
+
+<div class="input-group m-1 my-4" style="max-width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Temp(c°)</span>
+    </div>
+    <input type="number" @bind-value="@Temp" class="form-control" placeholder="0">
+    <div class="input-group-append">
+        <button @onclick="mostrar" class="btn btn-outline-secondary">Calcular</button>
+    </div>
+</div>
+
+@if (Temp != null)
+{
+<div class="row text-center m-2 my-4">
+    El agua esta en estado @calcular().
+</div>}
+
+
+@code{
+    public int? Temp { get; set; }
+    public bool? Visible { get; set; }
+
+    void mostrar()
+    {
+        Visible = true;
+    }
+
+    String calcular()
+    {
+        String Estado = "";
+
+        if (Temp < 0)
+        {
+            Estado = "Solido";
+        }
+        else if (Temp > 0 && Temp < 100)
+        {
+            Estado = "Liquido";
+        }
+        else if (Temp >= 100)
+        {
+            Estado = "Gaseoso";
+        }
+
+        return Estado;
+    }
+}

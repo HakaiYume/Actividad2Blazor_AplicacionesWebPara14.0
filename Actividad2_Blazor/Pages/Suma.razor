@@ -1,0 +1,29 @@
+﻿@page "/suma"
+
+<h3>Calculadora Basica</h3>
+
+<div class="input-group m-1 my-4" style="max-width: 400px;">
+    <input type="number" @bind-value="@A" class="form-control" placeholder="0">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">+</span>
+    </div>
+    <input type="number" @bind-value="@B" class="form-control" placeholder="0">
+    <div class="input-group-append">
+        <button @onclick="Calcular" class="btn btn-outline-secondary">Calcular</button>
+    </div>
+</div>
+@if(Result != null)
+{
+    <div>La suma de @A y @B es igual a @Result</div>
+}
+
+@code {
+    public int? A { get; set; }
+    public int? B { get; set; }
+    public int? Result { get; set; }
+
+    void Calcular()
+    {
+        Result = A + B;
+    }
+}

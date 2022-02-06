@@ -1,0 +1,85 @@
+﻿@page "/descuento"
+
+<h3>Descuento</h3>
+
+<div class="input-group m-1 my-4" style="max-width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Monto</span>
+    </div>
+    <input type="number" @bind-value="@Monto" class="form-control" placeholder="0">
+    <div class="input-group-append">
+        <button @onclick="calcular" class="btn btn-outline-secondary">Calcular</button>
+    </div>
+</div>
+
+<div class="input-group m-1 my-4" style="max-width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Numero Aleatorio</span>
+    </div>
+    <div class="input-group-append">
+        <button @onclick="cacularDesc" class="btn btn-outline-secondary">Calcular</button>
+    </div>
+</div>
+
+@if (Num != null)
+{
+    <div class="row text-center m-2 my-4">
+        El numero que le toco es @Num, El descuento sera del @Desc%
+    </div>
+}
+
+@if (Monto != null)
+{
+    @if (Num == null)
+    {
+        cacularDesc();
+    }
+    <div class="row text-left m-2 my-4" style="max-width: 300px;">
+        <table class="table table-striped">
+            <tbody>
+                <tr>
+                    <td>Monto</td>
+                    <td>@Monto$</td>
+                </tr>
+                <tr>
+                    <td>Descuento</td>
+                    <td>@DFinal$</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td>@MFinal$</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@code{
+    public double? Monto { get; set; }
+    public double MFinal { get; set; }
+    public double DFinal { get; set; }
+    public int Desc { get; set; }
+    public int? Num { get; set; }
+
+    void cacularDesc()
+    {
+        Random r = new Random();
+        Num = r.Next(0, 101);
+
+        if (Num < 74)
+        {
+            Desc = 15;
+        }
+        else if (Num >= 74)
+        {
+            Desc = 20;
+        }
+    }
+
+    void calcular()
+    {
+        DFinal = Math.Round((Convert.ToDouble(Monto) * Desc * 0.01), 2);
+        MFinal = Math.Round((Convert.ToDouble(Monto) - DFinal), 2);
+    }
+}

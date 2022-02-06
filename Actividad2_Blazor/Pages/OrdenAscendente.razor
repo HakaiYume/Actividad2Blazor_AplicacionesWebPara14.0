@@ -1,0 +1,71 @@
+﻿@page "/OrdenAscendente"
+
+<h3>Ordenar de Manera Ascendente</h3>
+
+<div class="input-group m-1 my-4" style="max-width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">1er Numero</span>
+    </div>
+    <input type="number" @bind-value="@Num1" class="form-control" placeholder="0">
+</div>
+
+<div class="input-group m-1 my-4" style="max-width: 300px;">
+    <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">2do Numero</span>
+    </div>
+    <input type="number" @bind-value="@Num2" class="form-control" placeholder="0">
+</div>
+
+<div class="text-center m-1 my-4" style="max-width: 300px;">
+    <button @onclick="calcular" class="btn btn-outline-secondary">Calcular</button>
+</div>
+
+@if (Num1 != null && Num2 != null)
+{
+    <div class="row text-center m-2 my-4" style="max-width: 200px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Numero</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>@Mayor</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>@Menor</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@code{ 
+    public int? Num1 { get; set; }
+    public int? Num2 { get; set; }
+    public int Mayor { get; set; }
+    public int Menor { get; set; }
+    void calcular()
+    {
+        if (Num1 < Num2)
+        {
+            Mayor = Convert.ToInt32(Num1);
+            Menor = Convert.ToInt32(Num2);
+        }
+        else if (Num1 > Num2)
+        {
+            Mayor = Convert.ToInt32(Num2);
+            Menor = Convert.ToInt32(Num1);
+        }
+        else if (Num1 == Num2)
+        {
+            Mayor = Convert.ToInt32(Num1);
+            Menor = Convert.ToInt32(Num2);
+        }
+    }
+}

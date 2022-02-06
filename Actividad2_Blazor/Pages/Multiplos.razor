@@ -1,0 +1,57 @@
+﻿@page "/multiplos"
+
+<h3>Multiplos</h3>
+
+<div class="row">
+    <div class="input-group m-1 my-4" style="max-width: 300px;">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Multiplicando</span>
+        </div>
+        <input type="number" @bind-value="@Num" class="form-control" placeholder="0">
+        <div class="input-group-append">
+            <button @onclick="mostrar" class="btn btn-outline-secondary">Calcular</button>
+        </div>
+    </div>
+</div>
+
+@if (Visible == true && Num != null)
+{
+    <div class="row text-center m-2 my-4" style="max-width: 300px;">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Multiplicador</th>
+                    <th scope="col">Producto</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (i = 1; i<=10; i++)
+                {
+                    <tr>
+                        <td>@Num X @i</td>
+                        <td>@calcular(Convert.ToInt32(Num), i) </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+@code { 
+    public int? Num { get; set; }
+    public int i { get; set; }
+    public bool? Visible { get; set; }
+    
+    void mostrar()
+    {
+        Visible = true;
+    }
+    
+    int calcular(int Num, int i)
+    {
+        int Result;
+
+        Result = Num * i;
+        return Result;
+    }
+}
